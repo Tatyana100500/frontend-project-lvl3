@@ -1,0 +1,47 @@
+{
+  "devDependencies": {
+    "css-loader": "^5.2.0",
+    "csv-loader": "^3.0.3",
+    "eslint": "^7.22.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "html-webpack-plugin": "^5.3.1",
+    "jest": "^26.6.3",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.28.0",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2",
+    "xml-loader": "^1.2.1"
+  },
+  "dependencies": {
+    "@babel/core": "^7.13.10",
+    "@babel/preset-env": "^7.13.12",
+    "babel-jest": "^26.6.3",
+    "bootstrap": "^5.0.0-beta3"
+  },
+  "scripts": {
+    "test": "jest--colors"
+  },
+  "type": "module",
+  "name": "@hexlet/code",
+  "description": "[![Actions Status](https://github.com/Tatyana100500/frontend-project-lvl3/workflows/hexlet-check/badge.svg)](https://github.com/Tatyana100500/frontend-project-lvl3/actions) <a href=\"https://codeclimate.com/github/Tatyana100500/backend-project-lvl3/maintainability\"><img src=\"https://api.codeclimate.com/v1/badges/d2fedefb901b3133661c/maintainability\" /></a> <a href=\"https://codeclimate.com/github/Tatyana100500/backend-project-lvl3/test_coverage\"><img src=\"https://api.codeclimate.com/v1/badges/d2fedefb901b3133661c/test_coverage\" /></a>",
+  "version": "1.0.0",
+  "main": "index.js",
+  "bin": {
+    "rss": "src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tatyana100500/frontend-project-lvl3.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tatyana100500/frontend-project-lvl3/issues"
+  },
+  "jest": {
+    "verbose": true,
+    "testURL": "http://localhost/"
+  },
+  "homepage": "https://github.com/Tatyana100500/frontend-project-lvl3#readme"
+}
