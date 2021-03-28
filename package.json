@@ -5,13 +5,15 @@
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "html-webpack-plugin": "^5.3.1",
+    "nodemon": "^2.0.7",
     "style-loader": "^2.0.0",
     "webpack": "^5.28.0",
     "webpack-cli": "^4.6.0",
-    "webpack-dev-server": "^3.11.2",
+    "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "bootstrap": "^5.0.0-beta3"
+    "bootstrap": "^5.0.0-beta3",
+    "node-fetch": "^2.6.1"
   },
   "scripts": {
     "start": "webpack-dev-server -d --hot --config webpack.config.cjs --watch"
@@ -24,7 +26,7 @@
   "name": "@hexlet/code",
   "description": "[![Actions Status](https://github.com/Tatyana100500/frontend-project-lvl3/workflows/hexlet-check/badge.svg)](https://github.com/Tatyana100500/frontend-project-lvl3/actions) <a href=\"https://codeclimate.com/github/Tatyana100500/backend-project-lvl3/maintainability\"><img src=\"https://api.codeclimate.com/v1/badges/d2fedefb901b3133661c/maintainability\" /></a> <a href=\"https://codeclimate.com/github/Tatyana100500/backend-project-lvl3/test_coverage\"><img src=\"https://api.codeclimate.com/v1/badges/d2fedefb901b3133661c/test_coverage\" /></a>",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "./src/index.js",
   "engines": {
     "node": ">=14"
   },

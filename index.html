@@ -1,0 +1,95 @@
+<!doctype html><html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+        <title>RSS Reader</title>
+    </head>
+    <body class="d-flex flex-column min-vh-100">
+        <main class="flex-grow-1">
+            <div class="container-xl position-fixed h-100 w-25 bg-light">
+                <div class="mt-5">
+                    <div class="pt-5 d-flex justify-content-between align-items-center">
+                        <h3 id="feeds-header" class="ml-2 text-muted" role="heading-role">Your feeds</h3>
+                        <button class="ml-5 text-muted border-0 bg-light btn-outline-light btn" 
+                        data-toggle="channels-view" role="button">show</button>
+                    </div>
+                    <ul class="visible list-group" role="feed">No channels added</ul>
+                </div>
+            </div>
+            <header class="w-75 ml-auto mt-0 bg-dark d-flex justify-content-between align-items-center border-bottom border-light">
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="https://github.com/WilhelmYakunin/frontend-project-lvl3" target="_blank" class="m-3">
+                        <span class="mr-3"><svg height="32" viewBox="0 0 16 16" version="1.1" width="32" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 
+                        0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01
+                        1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12
+                        0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2
+                        .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 
+                        0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 
+                        .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+                        </span>
+                    </a>
+                    <h1 id="main-header" class="display-6 text-light" role="heading-role">RSS reader</h1>
+                    </div>
+                    <div class="btn-group m-3">
+                        <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" 
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="switch">Languages</button>
+                        <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; 
+                        transform: translate3d(0px, 48px, 0px); top: 0px; left: 0px; 
+                    will-change: transform;">
+                    <a class="dropdown-item" href="#" data-lng="en">English</a> 
+                    <a class="dropdown-item" href="#" data-lng="de">Deutsch</a> 
+                    <a class="dropdown-item" href="#" data-lng="ru">Русский</a>
+                </div>
+            </div>
+        </header>
+        <section class="jumbotron jumbotron-fluid w-75 ml-auto bg-transparent">
+            <div class="container-xl">
+                <div class="row">
+                    <div class="col-md-10 col-lg-8 text-muted">
+                        <p class="lead" role="banner-role">Start reading RSS today! It is easy, it is nicely.</p>
+                        <form action="" class="rss-form" method="POST" role="form">
+                            <div class="input-group mb-3 input-group-lg">
+                                <input name="url" class="form-control" aria-label="url" 
+                                aria-describedby="basic-addon2" placeholder="RSS link" role="textbox">
+                                <div class="input-group-append">
+                                    <button type="submit" aria-label="add" class="btn btn-primary border-dark px-sm-5" 
+                                    role="button">Button</button>
+                                </div>
+                            </div>
+                        </form>
+                        <p class="text-muted my-1" role="complementary">Example: https://ru.hexlet.io/lessons.rss</p>
+                        <div role="document"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="row w-75 ml-auto">
+            <div class="col-md-10 col-lg-8" role="list"></div>
+        </div>
+    </main>
+    <footer class="footer border-top py-3 mt-5">
+        <div class="container-xl">
+            <div class="d-flex w-75 ml-auto">
+                <p role="contetntinfo">created by</p>
+                <a class="ml-1" href="https://github.com/WilhelmYakunin/" target="_blank">Wilhelm</a>
+            </div>
+        </div>
+    </footer>
+    <div class="modal fade bg-transparent" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <div class="close" type="button" data-dismiss="modal" aria-label="close"><span aria-hidden="true">x</span>
+                    </div>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary" target="_blank" role="post-link" rel="noopener noreferrer"></a> 
+                    <button type="button" class="btn btn-secondary" role="close-modal" data-dismiss="modal"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

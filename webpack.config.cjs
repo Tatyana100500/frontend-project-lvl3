@@ -1,11 +1,12 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-
+const HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
+const webpack = require('webpack'); //to access built-in plugins
+const path = require('path');
 module.exports = {
-  //entry: 'index.js',
-  //output: {
-  //  path: __dirname + '/dist',
-  //  filename: 'index_bundle.js'
-  //},
+  entry: '/src/index.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'index_bundle.js'
+  },
   module: {
     rules: [
       {
