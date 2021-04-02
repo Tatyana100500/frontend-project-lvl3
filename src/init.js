@@ -1,12 +1,15 @@
+import 'bootstrap';
+import 'bootstrap/dist/js/bootstrap.js';
 import i18next from 'i18next';
 import * as yup from 'yup';
 import onChange from 'on-change';
 import _ from 'lodash';
 import fetch from 'node-fetch';
-import { i18n, languages } from './locales/i18nEngine';
+//import { i18n, languages } from './locales/i18nEngine';
 import parseLink from './parse.js';
 
-export default () => {
+
+export default (document) => {
     const form = document.querySelector('[role="form"]');
     const urlInput = document.querySelector('[role="textbox"]');
     const submitButton = document.querySelector('[aria-label="add"]');
@@ -67,6 +70,7 @@ export default () => {
         validate(url).then(() => fetch(getQueryString(url)))
           .then((response) => response.json())
           .then((data) => {
+            console.log(data);
             const id = _.uniqueId();
             const prasedUrl = parseLink(data.contents);
             const { title, description, postsList } = prasedUrl;

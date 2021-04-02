@@ -1,3 +1,6 @@
+develop:
+	npx webpack serve
+
 install:
 	npm ci
 
@@ -10,3 +13,5 @@ test:
 
 lint:
 	npx eslint .
+
+.PHONY: test

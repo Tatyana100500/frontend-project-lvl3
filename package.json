@@ -1,7 +1,9 @@
 {
   "devDependencies": {
     "@babel/cli": "^7.13.10",
-    "@babel/core": "^7.13.13",
+    "@babel/core": "^7.13.14",
+    "@babel/preset-env": "^7.13.12",
+    "babel-loader": "^8.2.2",
     "css-loader": "^5.2.0",
     "eslint": "^7.22.0",
     "eslint-config-airbnb-base": "^14.2.1",
@@ -10,12 +12,11 @@
     "jest": "^26.6.3",
     "nodemon": "^2.0.7",
     "style-loader": "^2.0.0",
-    "webpack": "^5.28.0",
+    "webpack": "^5.30.0",
     "webpack-cli": "^4.6.0",
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "@babel/preset-env": "^7.13.12",
     "axios": "^0.21.1",
     "babel-jest": "^26.6.3",
     "bootstrap": "^5.0.0-beta3",
@@ -26,8 +27,7 @@
     "yup": "^0.32.9"
   },
   "scripts": {
-    "start": "webpack-dev-server -d --hot --config webpack.config.cjs --watch",
-    "test": "jest"
+    "test": "jest --colors"
   },
   "type": "module",
   "name": "@hexlet/code",
@@ -36,6 +36,10 @@
   "main": "./src/index.js",
   "engines": {
     "node": ">=14"
+  },
+  "jest": {
+    "verbose": true,
+    "testURL": "http://localhost/"
   },
   "repository": {
     "type": "git",
