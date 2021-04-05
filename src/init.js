@@ -298,7 +298,6 @@ export default () => {
         validate(url).then(() => fetch(getQueryString(url)))
           .then((response) => response.json())
           .then((data) => {
-            console.log(data);
             const id = _.uniqueId();
             const prasedUrl = parseLink(data.contents);
             const { title, description, postsList } = prasedUrl;
