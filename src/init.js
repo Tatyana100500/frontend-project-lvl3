@@ -7,8 +7,9 @@ import _ from 'lodash';
 import fetch from 'node-fetch';
 import { i18n, languages } from './locales/textOrg.js';
 import parseLink from './parse.js';
+import debug from 'debug';
 
-
+const log = debug('page-loader');
 export default () => {
     const form = document.querySelector('[role="form"]');
     const urlInput = document.querySelector('[role="textbox"]');
@@ -143,7 +144,9 @@ export default () => {
     
       function renderLngContent(lng) {
         i18next.changeLanguage(lng);
-        Object.entries(elemArr).forEach(([propertyName, elem]) => updateLngContent(propertyName, elem));
+        Object.entries(elemArr).forEach(([propertyName, elem]) => {
+            log('!!!!!!!!!!!!!!!', propertyName, elem);
+            updateLngContent(propertyName, elem)});
         handlePanelButtonContnetn(state.channelsVisible);
         if (state.form.processState !== 'failed' && state.form.processState !== 'init: ready for processing') {
           feedbackDiv.textContent = i18next.t(state.form.processState);
