@@ -1,8 +1,7 @@
 export default (document) => {
-    const domParser = new DOMParser();
+  const domParser = new DOMParser();
     const doc = domParser.parseFromString(`${document}`, 'application/xml');
     const channel = doc.querySelector('channel');
-  
     const title = channel.querySelector('title').textContent;
     const description = channel.querySelector('description').textContent;
     const posts = channel.querySelectorAll('item');
@@ -15,5 +14,5 @@ export default (document) => {
         pubDate, postTitle, postDescription, postLink,
       };
     });
-    return { title, description, postsList };
-  }
+  return { title, description, postsList };  
+};
