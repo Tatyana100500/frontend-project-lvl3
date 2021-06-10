@@ -135,7 +135,7 @@ export default () => {
   function renderLngContent(lng) {
     i18next.changeLanguage(lng);
     Object.entries(elemArr).forEach(([propertyName, elem]) => {
-      updateLngContent(propertyName, elem); 
+      updateLngContent(propertyName, elem);
     });
     handlePanelButtonContnetn(state.channelsVisible);
     if (state.form.processState !== 'failed' && state.form.processState !== 'init: ready for processing') {
@@ -154,34 +154,11 @@ export default () => {
       .url('invalidUrl')
       .required('notEmptyString')
       .notOneOf(state.channels.allChannels, 'hasUrlYet')
-      .validate(url)
-  };
-  const watchedState = onChange(state, (path, value) => {
-    switch (path) {
-      case 'lng':
-        renderLngContent(value);
-        break;
-      case 'channelsVisible':
-        handlePanelVisiability(value);
-        break;
-      case 'form.processState':
-        processStateHandler(value);
-        break;
-      case 'channels.allIds':
-        renderNewChannel(value.pop());
-        break;
-      case 'channels.allChannels':
-        watchChannel(value.pop());
-        break;
-      case 'error':
-        renderFeedback(value);
-        break;
-      default:
-        renderFeedback(`an unexpectable error, please contanct developer with this messageg: path ${path}, value ${value}`);
-    }
-  });
+      .validate(url);
+  }
   function creatPostLi(post) {
-    const { pubDate, postTitle, postDescription, postLink } = post;
+    const {
+      pubDate, postTitle, postDescription, postLink } = post;
     const feedLi = document.createElement('li');
     feedLi.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'm-2');
     const postBody = document.createElement('div');
@@ -250,7 +227,8 @@ export default () => {
     return feedsContainer.appendChild(newChannel);
   }
   function watchChannel(channelId) {
-    const { url, title, description, lastpubDate } = state.channels.byId[channelId];
+    const {
+      url, title, description, lastpubDate } = state.channels.byId[channelId];
     fetch(getQueryString(url)).then((response) => response.json())
       .then((data) => parseLink(data.contents))
       .then((currentRssData) => {
@@ -269,6 +247,30 @@ export default () => {
       });
     return setTimeout(watchChannel, 5000, channelId);
   }
+  const watchedState = onChange(state, (path, value) => {
+    switch (path) {
+      case 'lng':
+        renderLngContent(value);
+        break;
+      case 'channelsVisible':
+        handlePanelVisiability(value);
+        break;
+      case 'form.processState':
+        processStateHandler(value);
+        break;
+      case 'channels.allIds':
+        renderNewChannel(value.pop());
+        break;
+      case 'channels.allChannels':
+        watchChannel(value.pop());
+        break;
+      case 'error':
+        renderFeedback(value);
+        break;
+      default:
+        renderFeedback(`an unexpectable error, please contanct developer with this messageg: path ${path}, value ${value}`);
+    }
+  });
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
