@@ -135,6 +135,7 @@ export default () => {
     
       function updateLngContent(elemName, elem) {
         const transletEleme = elem;
+        console.log('??????????//', elemName, elem, transletEleme)
         transletEleme.textContent = i18next.t(elemName);
       }
     
