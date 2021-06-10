@@ -20,6 +20,7 @@ export default () => {
     const lngToggler = document.querySelector('[role="switch"]');
     const inputExmaple = document.querySelector('[role="complementary"]');
     const footerText = document.querySelector('[role="contetntinfo"]');
+    console.log('footerText', footerText)
     const panelButton = document.querySelector('[data-toggle="channels-view"]');
     const modalLinkButton = document.querySelector('[role="post-link"]');
     const modalCloseButton = document.querySelector('[role="close-modal"]');
