@@ -85,6 +85,9 @@ export default () => {
         feedbackDiv.textContent = info;
     }
   }
+  function renderProcessErrors(err) {
+    renderFeedback(err);
+  }
   function processStateHandler(processState) {
     switch (processState) {
       case 'init: ready for processing':
@@ -112,32 +115,23 @@ export default () => {
         renderFeedback(`an unexpectable error, please contanct developer with this secret messageg: ${processState}`);
     }
   }
-    
-  function handlePanelVisiability(vision) {
-    feedsContainer.classList.toggle('invisible');
-    handlePanelButtonContnetn(vision);
-  }
-    
   function changeModalContent(modalState) {
     const { postTitle, postDescription, postLink } = modalState;
     modalTitle.textContent = postTitle;
     modalBody.textContent = postDescription;
     modalLinkButton.href = postLink;
-  }
-    
-  function renderProcessErrors(err) {
-    renderFeedback(err);
-  }    
-    
+  }     
   function updateLngContent(elemName, elem) {
     const transletEleme = elem;
     transletEleme.textContent = i18next.t(elemName);
   }
-    
   function handlePanelButtonContnetn(vision) {
     return vision === true ? updateLngContent('panelClose', panelButton) : updateLngContent('panelButton', panelButton);
   }
-    
+  function handlePanelVisiability(vision) {
+    feedsContainer.classList.toggle('invisible');
+    handlePanelButtonContnetn(vision);
+  }  
   function renderLngContent(lng) {
     i18next.changeLanguage(lng);
     Object.entries(elemArr).forEach(([propertyName, elem]) => {
@@ -153,17 +147,14 @@ export default () => {
       feedsContainer.textContent = i18next.t('feeds');
     }
   }
-    
   i18n().then(() => renderLngContent('ru'));
-
   function validate(url) {
     return yup.string()
       .url('invalidUrl')
       .required('notEmptyString')
       .notOneOf(state.channels.allChannels, 'hasUrlYet')
       .validate(url);
-  };  
-
+  };
   const watchedState = onChange(state, (path, value) => {
     switch (path) {
       case 'lng':
@@ -235,7 +226,6 @@ export default () => {
     feedLi.appendChild(postBody);
     return feedLi;
   }
-    
   function renderNewChannel(channeId) {
     const { title, description, postsList } = state.channels.byId[channeId];
     if (feedsContainer.children.length === 0) {
@@ -258,7 +248,6 @@ export default () => {
     postsList.forEach((post) => postsUl.appendChild(creatPostLi(post)));
     return feedsContainer.appendChild(newChannel);
   }
-  
   function watchChannel(channelId) {
     const { url, title, description, lastpubDate } = state.channels.byId[channelId];
       fetch(getQueryString(url)).then((response) => response.json())
@@ -277,62 +266,57 @@ export default () => {
             renderNewChannel(channelId);
           }
         });
-      return setTimeout(watchChannel, 5000, channelId);
-    }
-    
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const formData = new FormData(e.target);
-      formData.get('url');
-      const { url } = Object.fromEntries(formData);
-      watchedState.form.processState = 'loading';
-      validate(url).then(() => fetch(getQueryString(url)))
-        .then((response) => response.json())
-        .then((data) => {
-          const id = _.uniqueId();
-          const prasedUrl = parseLink(data.contents);
-          const { title, description, postsList } = prasedUrl;
-          const date = new Date();
-          const newChannel = {
-            url, id, title, description, postsList, lastpubDate: date,
-          };
-          state.channels.byId[id] = newChannel;
-          state.channels.allChannels.push(url);
-          watchedState.form.processState = 'loaded';
-          watchedState.channels.allIds.push(id);
-          form.reset();
-        })
-        .catch((err) => {
-          if (err.message === "Cannot read property 'querySelector' of null") {
-            watchedState.form.processError = 'notRss';
-            watchedState.form.processState = 'failed';
-            return;
-          } if (err.name === 'FetchError') {
-            watchedState.form.processError = 'network';
-            watchedState.form.processState = 'failed';
-            return;
-          }
-          watchedState.form.processError = err.message;
+    return setTimeout(watchChannel, 5000, channelId);
+  }
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    formData.get('url');
+    const { url } = Object.fromEntries(formData);
+    watchedState.form.processState = 'loading';
+    validate(url).then(() => fetch(getQueryString(url)))
+      .then((response) => response.json())
+      .then((data) => {
+        const id = _.uniqueId();
+        const prasedUrl = parseLink(data.contents);
+        const { title, description, postsList } = prasedUrl;
+        const date = new Date();
+        const newChannel = {
+          url, id, title, description, postsList, lastpubDate: date,
+        };
+        state.channels.byId[id] = newChannel;
+        state.channels.allChannels.push(url);
+        watchedState.form.processState = 'loaded';
+        watchedState.channels.allIds.push(id);
+        form.reset();
+      })
+      .catch((err) => {
+        if (err.message === "Cannot read property 'querySelector' of null") {
+          watchedState.form.processError = 'notRss';
           watchedState.form.processState = 'failed';
-        });
-    });
-
-    urlInput.addEventListener('input', () => {
-      watchedState.form.processState = 'filing';
-    });
-    panelButton.addEventListener('click', () => {
-      const channelPanelState = state.channelsVisible;
-      watchedState.channelsVisible = !channelPanelState;
-    });
-        
-    const handleSwitchLanguage = (e) => {
-      const lng = e.target.attributes['data-lng'].value;
-      watchedState.lng = lng;
-    };
-        
-    languages.forEach((lng) => {
-      const lngButton = document.querySelector(`[data-lng="${lng}"]`);
-      return lngButton.addEventListener('click', handleSwitchLanguage);
-    });
-    
+          return;
+        } if (err.name === 'FetchError') {
+          watchedState.form.processError = 'network';
+          watchedState.form.processState = 'failed';
+          return;
+        }
+        watchedState.form.processError = err.message;
+        watchedState.form.processState = 'failed';
+      });
+  });
+  urlInput.addEventListener('input', () => {
+    watchedState.form.processState = 'filing';
+  });
+  panelButton.addEventListener('click', () => {
+    const channelPanelState = state.channelsVisible;
+    watchedState.channelsVisible = !channelPanelState;
+  });  
+  const handleSwitchLanguage = (e) => {
+    const lng = e.target.attributes['data-lng'].value;
+    watchedState.lng = lng;
+  }; 
+  languages.forEach((lng) => {
+    const lngButton = document.querySelector(`[data-lng="${lng}"]`);
+    return lngButton.addEventListener('click', handleSwitchLanguage);
+  }); 
 };
