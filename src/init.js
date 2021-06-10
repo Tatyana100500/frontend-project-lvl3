@@ -145,7 +145,7 @@ export default () => {
       function renderLngContent(lng) {
         i18next.changeLanguage(lng);
         Object.entries(elemArr).forEach(([propertyName, elem]) => {
-            log('!!!!!!!!!!!!!!!', propertyName, elem);
+            console.log('!!!!!!!!!!!!!!!', propertyName, elem);
             updateLngContent(propertyName, elem)});
         handlePanelButtonContnetn(state.channelsVisible);
         if (state.form.processState !== 'failed' && state.form.processState !== 'init: ready for processing') {
