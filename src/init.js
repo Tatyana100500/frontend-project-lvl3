@@ -136,7 +136,7 @@ export default () => {
     
       function updateLngContent(elemName, elem) {
         const transletEleme = elem;
-        console.log('??????????//', elemName, elem, transletEleme)
+        //console.log('??????????//', elemName, elem, transletEleme)
         transletEleme.textContent = i18next.t(elemName);
       }
     
@@ -147,7 +147,7 @@ export default () => {
       function renderLngContent(lng) {
         i18next.changeLanguage(lng);
         Object.entries(elemArr).forEach(([propertyName, elem]) => {
-            console.log('!!!!!!!!!!!!!!!', propertyName, elem);
+            //console.log('!!!!!!!!!!!!!!!', propertyName, elem);
             updateLngContent(propertyName, elem)});
         handlePanelButtonContnetn(state.channelsVisible);
         if (state.form.processState !== 'failed' && state.form.processState !== 'init: ready for processing') {
@@ -210,10 +210,10 @@ export default () => {
         feedLink.setAttribute('target', '_blank');
         feedLink.href = postLink;
         feedLink.textContent = postTitle;
-        feedLink.classList.add('font-weight-bold');
+        feedLink.classList.add('fw-bold');
         feedLink.addEventListener('click', (e) => {
           e.preventDefault();
-          feedLink.classList.remove('font-weight-bold');
+          feedLink.classList.remove('fw-bold');
           window.open(postLink);
         });
         postHeader.appendChild(feedLink);
@@ -233,7 +233,7 @@ export default () => {
         const buttonId = '#modal';
         feedButton.setAttribute('data-target', buttonId);
         feedButton.addEventListener('click', () => {
-          feedLink.classList.remove('font-weight-bold');
+          feedLink.classList.remove('fw-bold');
           changeModalContent({
             postTitle,
             postDescription,
