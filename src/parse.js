@@ -14,5 +14,5 @@ export default (document) => {
       pubDate, postTitle, postDescription, postLink,
     };
   });
-  return { title, description, postsList };  
+  return { title, description, postsList };
 };

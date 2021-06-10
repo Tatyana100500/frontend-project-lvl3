@@ -120,7 +120,7 @@ export default () => {
     modalTitle.textContent = postTitle;
     modalBody.textContent = postDescription;
     modalLinkButton.href = postLink;
-  }     
+  }
   function updateLngContent(elemName, elem) {
     const transletEleme = elem;
     transletEleme.textContent = i18next.t(elemName);
@@ -131,11 +131,12 @@ export default () => {
   function handlePanelVisiability(vision) {
     feedsContainer.classList.toggle('invisible');
     handlePanelButtonContnetn(vision);
-  }  
+  }
   function renderLngContent(lng) {
     i18next.changeLanguage(lng);
     Object.entries(elemArr).forEach(([propertyName, elem]) => {
-      updateLngContent(propertyName, elem)});
+      updateLngContent(propertyName, elem); 
+    });
     handlePanelButtonContnetn(state.channelsVisible);
     if (state.form.processState !== 'failed' && state.form.processState !== 'init: ready for processing') {
       feedbackDiv.textContent = i18next.t(state.form.processState);
@@ -153,13 +154,13 @@ export default () => {
       .url('invalidUrl')
       .required('notEmptyString')
       .notOneOf(state.channels.allChannels, 'hasUrlYet')
-      .validate(url);
+      .validate(url)
   };
   const watchedState = onChange(state, (path, value) => {
     switch (path) {
       case 'lng':
         renderLngContent(value);
-         break;
+        break;
       case 'channelsVisible':
         handlePanelVisiability(value);
         break;
@@ -250,22 +251,22 @@ export default () => {
   }
   function watchChannel(channelId) {
     const { url, title, description, lastpubDate } = state.channels.byId[channelId];
-      fetch(getQueryString(url)).then((response) => response.json())
-        .then((data) => parseLink(data.contents))
-        .then((currentRssData) => {
-          const { postsList } = currentRssData;
-          const newPosts = postsList.filter((post) => post.pubDate > lastpubDate);
-          return newPosts.length !== 0 ? postsList : false;
-        })
-        .then((postsList) => {
-          if (postsList !== false) {
-            const newPubDate = new Date();
-            state.channels.byId[channelId] = {
-              url, title, description, postsList, newPubDate,
-            };
-            renderNewChannel(channelId);
-          }
-        });
+    fetch(getQueryString(url)).then((response) => response.json())
+      .then((data) => parseLink(data.contents))
+      .then((currentRssData) => {
+        const { postsList } = currentRssData;
+        const newPosts = postsList.filter((post) => post.pubDate > lastpubDate);
+        return newPosts.length !== 0 ? postsList : false;
+      })
+      .then((postsList) => {
+        if (postsList !== false) {
+          const newPubDate = new Date();
+          state.channels.byId[channelId] = {
+            url, title, description, postsList, newPubDate,
+          };
+          renderNewChannel(channelId);
+        }
+      });
     return setTimeout(watchChannel, 5000, channelId);
   }
   form.addEventListener('submit', (e) => {
@@ -310,13 +311,13 @@ export default () => {
   panelButton.addEventListener('click', () => {
     const channelPanelState = state.channelsVisible;
     watchedState.channelsVisible = !channelPanelState;
-  });  
+  });
   const handleSwitchLanguage = (e) => {
     const lng = e.target.attributes['data-lng'].value;
     watchedState.lng = lng;
-  }; 
+  };
   languages.forEach((lng) => {
     const lngButton = document.querySelector(`[data-lng="${lng}"]`);
     return lngButton.addEventListener('click', handleSwitchLanguage);
-  }); 
+  });
 };

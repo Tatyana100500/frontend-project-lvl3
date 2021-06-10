@@ -24,5 +24,5 @@ export default {
     invalidUrl: 'Die eingegebene URL ist falsch',
     init: '',
     languageError: 'Fehler der Sprache der Initialisierung',
-  },  
+  },
 };
