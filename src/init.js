@@ -158,7 +158,8 @@ export default () => {
   }
   function creatPostLi(post) {
     const {
-      pubDate, postTitle, postDescription, postLink } = post;
+      pubDate, postTitle, postDescription, postLink,
+    } = post;
     const feedLi = document.createElement('li');
     feedLi.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'm-2');
     const postBody = document.createElement('div');
@@ -228,7 +229,8 @@ export default () => {
   }
   function watchChannel(channelId) {
     const {
-      url, title, description, lastpubDate } = state.channels.byId[channelId];
+      url, title, description, lastpubDate,
+    } = state.channels.byId[channelId];
     fetch(getQueryString(url)).then((response) => response.json())
       .then((data) => parseLink(data.contents))
       .then((currentRssData) => {
